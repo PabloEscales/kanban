@@ -1,0 +1,26 @@
+@import 'https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;900&display=swap';
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  font-weight: 700;
+  line-height: 1.5;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #316761;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
