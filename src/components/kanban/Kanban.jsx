@@ -8,7 +8,7 @@ export function Kanban() {
   const [data, setData] = useState(mockData)
 
   const onDragEnd = (result) => {
-    if (result.destination) return
+    if (!result.destination) return
     const {source, destination} = result
     if (source.droppableId !== destination.droppableId)
       {
@@ -35,33 +35,32 @@ export function Kanban() {
       <div className='kanban'>
         {data.map((section) =>(
           <Droppable key={section.id} droppableId={section.id}>
-            {(provided) => (
-              <div {...provided.droppableProps} className='kanban__section'
-              ref={provided.innerRef}>
-                <div className='kanban__section__title'>
-                  {section.title}
+            {(provided) =>
+              (
+                <div {...provided.droppableProps} className='kanban__section'
+                ref={provided.innerRef}>
+                  <div className='kanban__section__title'>
+                    {section.title}
+                  </div>
+                  <div className='kanban__section__content'>
+                    {section.tasks.map((task, index) => (
+                      <Draggable key={task.id} draggableId={task.id} index={index}>
+                        {(provided, snapshot) => (
+                          <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
+                          style={
+                            {...provided.draggableProps.style, opacity: snapshot.isDragging ? '0.5' : '1'}
+                          }>
+                            <Card>
+                              {task.title}
+                            </Card>
+
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                  </div>
                 </div>
-                <div className='kanban__section__content'>
-                  {section.tasks.map((task, index) => (
-                    <Draggable key={task.id} draggableId={task.id} index={index}>
-                      {(provided, snapshot) => (
-                        <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
-                        style={
-                          {...provided.draggableProps.style, opacity: snapshot.isDragging ? '0.5' : '1'}
-                        }>
-                          <Card>
-                            {task.title}
-                          </Card>
-
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                </div>
-
-              </div>
-            )
-
+              )
             }
           </Droppable>
         ))}
